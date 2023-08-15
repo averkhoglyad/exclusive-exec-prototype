@@ -15,9 +15,24 @@ import kotlin.reflect.KClass
 @SpringBootApplication
 class ProtoApplication {
 
+//    @Bean
+//    fun exclusiveExecutionAspect(): ExclusiveExecutionAspect {
+//        return ExclusiveExecutionAspect()
+//    }
+
     @Bean
-    fun exclusiveExecutionAspect(): ExclusiveExecutionAspect {
-        return ExclusiveExecutionAspect()
+    fun exclusiveExecutionPointcut(): ExclusiveExecutionPointcut {
+        return ExclusiveExecutionPointcut("io.averkhoglyad.proto")
+    }
+
+    @Bean
+    fun exclusiveExecutionMethodInterceptor(): ExclusiveExecutionMethodInterceptor {
+        return ExclusiveExecutionMethodInterceptor()
+    }
+
+    @Bean
+    fun defaultPointcutAdvisor(): DefaultPointcutAdvisor {
+        return DefaultPointcutAdvisor(exclusiveExecutionPointcut(), exclusiveExecutionMethodInterceptor())
     }
 
     @Bean
