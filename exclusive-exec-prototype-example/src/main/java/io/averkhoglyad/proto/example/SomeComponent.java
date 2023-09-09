@@ -1,6 +1,6 @@
 package io.averkhoglyad.proto.example;
 
-import io.averkhoglyad.proto.exclusive.Exclusive;
+import io.averkhoglyad.proto.exclusive.annotation.Exclusive;
 
 public class SomeComponent {
 

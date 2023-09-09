@@ -1,26 +1,25 @@
 package io.averkhoglyad.proto.example;
 
-import io.averkhoglyad.proto.exclusive.ExclusiveExecutionConfig;
+import io.averkhoglyad.proto.exclusive.context.EnableExclusiveExecution;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 import java.util.stream.IntStream;
 
 @SpringBootApplication
-@Import(ExclusiveExecutionConfig.class)
+@EnableExclusiveExecution
 public class ProtoApplication {
 
     @Bean
-    SomeComponent someComponent() {
-        return new SomeComponent();
+    InheritedComponent someComponent() {
+        return new InheritedComponent();
     }
 
     public static void main(String[] args) {
         var context = SpringApplication.run(ProtoApplication.class, args);
 
-        var bean = context.getBean(SomeComponent.class);
+        var bean = context.getBean(InheritedComponent.class);
 
         doInParallel(() -> bean.test0());
         doInParallel(() -> bean.test1_2(1, 2));
@@ -31,9 +30,12 @@ public class ProtoApplication {
         doInParallel(() -> bean.test1_2(2, 2));
         doInParallel(() -> bean.test1_2(2, 2));
 
+        doInParallel(() -> bean.test3(1, 2, 3));
+        doInParallel(() -> bean.test3(1, 2, 3));
+        doInParallel(() -> bean.test3(1, 2, 3));
+
         IntStream.range(0, 3)
-                .parallel()
-                .forEach(i -> bean.test1_2(1, i));
+                .forEach(i -> doInParallel(() -> bean.test1_2(1, i)));
     }
 
     private static void doInParallel(Runnable fn) {

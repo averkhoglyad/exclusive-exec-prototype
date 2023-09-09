@@ -1,4 +1,4 @@
-package io.averkhoglyad.proto.exclusive
+package io.averkhoglyad.proto.exclusive.impl
 
 import java.util.*
 

@@ -1,5 +1,6 @@
-package io.averkhoglyad.proto.exclusive
+package io.averkhoglyad.proto.exclusive.impl
 
+import io.averkhoglyad.proto.exclusive.annotation.Exclusive
 import java.lang.reflect.Method
 import java.util.concurrent.locks.Lock
 
