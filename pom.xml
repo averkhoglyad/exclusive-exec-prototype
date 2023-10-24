@@ -11,8 +11,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>exclusive-exec-prototype-starter</module>
+        <module>exclusive-exec-prototype-boot-lib</module>
         <module>exclusive-exec-prototype-example</module>
+        <module>exclusive-exec-prototype-boot-starter</module>
     </modules>
 
 </project>

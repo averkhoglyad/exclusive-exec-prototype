@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
-@EnableExclusiveExecution
 public class ProtoApplication {
 
     @Bean
@@ -22,13 +21,6 @@ public class ProtoApplication {
         var bean = context.getBean(InheritedComponent.class);
 
         doInParallel(() -> bean.test0());
-        doInParallel(() -> bean.test1_2(1, 2));
-        doInParallel(() -> bean.test1_2(1, 2));
-        doInParallel(() -> bean.test1_2(1, 1));
-        doInParallel(() -> bean.test1_2(1, -1));
-        doInParallel(() -> bean.test1_2(2, 2));
-        doInParallel(() -> bean.test1_2(2, 2));
-        doInParallel(() -> bean.test1_2(2, 2));
 
         doInParallel(() -> bean.test3(1, 2, 3));
         doInParallel(() -> bean.test3(1, 2, 3));
